@@ -1,0 +1,21 @@
+<div class="modal-header">
+    <h4 class="modal-title">Invite candidate for a new test</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross cliick')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="inviteCandidateForm" (ngSubmit)="onSubmit()">
+        <select required class="form-control" formControlName="questionnaire">
+            <option [ngValue]="null" disabled>Select questionnaire</option>
+            <option *ngFor="let t of templates" [ngValue]="t">{{t.testTemplateName}}</option>
+        </select><br>
+        <select required class="form-control" formControlName="reviewer">
+            <option [ngValue]="null" disabled>Select reviewer</option>
+            <option *ngFor="let i of interviewers" [ngValue]="i">{{i.firstName}}</option>
+        </select> 
+<div class="modal-footer">
+    <button  [disabled]="!inviteCandidateForm.valid" type="submit" class="btn btn-primary">Confirm</button>
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>
+</form>

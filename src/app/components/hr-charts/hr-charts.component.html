@@ -1,0 +1,42 @@
+<!-- <div class="chart" id="chartContainer" ></div>
+<div class="chart" id="chartTestGroupContainer"></div> -->
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                Test information per technology
+            </div>
+            <div class="card-body">
+                <div class="chart-wrapper">
+                    <canvas baseChart
+                        [datasets]="testPerTechnologyChartData"
+                        [labels]="testPerTechnologyChartLabels"
+                        [options]="testPerTechnologyChartOptions"
+                        [legend]="true"
+                        [chartType]="'horizontalBar'">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                Total tests
+            </div>
+            <div class="card-body">
+                <div class="chart-wrapper">
+                    <canvas baseChart 
+                        [data]="totalTestsChartData" 
+                        [labels]="totalTestsChartLabels"
+                        [chartType]="totalTestsChartType" 
+                        [options]="totalTestsChartOptions"
+                        [colors]="totalTestsChartColors">
+                        
+                    </canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

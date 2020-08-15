@@ -1,0 +1,38 @@
+
+<div class="card-body">
+
+    <div>
+        <table class="table table-hover table-stripped">
+            <thead class="thead-dark">
+                <th class="fit">#</th>
+                <th scope="col">Templates Name</th>
+                
+                <th scope="col">Actions</th>
+            </thead>
+            <tbody>
+                <ng-container
+                    *ngFor="let t of testTemplate ; let i = index">
+                    <tr>
+                        <td class="fit">{{i+1}}</td>
+                        
+                        <td>{{t.testTemplateName}}</td>
+                        <td>
+                            <div ngbDropdown class="d-inline-block">
+                                <button class="btn btn-sm" ngbDropdownToggle><i
+                                        class="fa fa-ellipsis-v"></i></button>
+                                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                    <button ngbDropdownItem (click)="openTestTemplateModal(t)"><i
+                                        class="fa fa-info text-primary"></i> Info</button>
+                                    <button ngbDropdownItem (click)="deleteTemplate(t.id)"><i
+                                        class="fa fa-remove text-danger"></i> Delete</button>
+                                    
+                                </div>
+                            </div>
+                        </td>
+
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="container">
+    <div *ngIf="userRole===roles.HR">
+        <app-hr-dashboard></app-hr-dashboard>
+    </div>
+    <div *ngIf="userRole===roles.CANDIDATE">
+        <app-candidate-dashboard></app-candidate-dashboard>
+    </div>
+    <div *ngIf="userRole===roles.INTERVIEWER">
+        <app-interviewer-dashboard></app-interviewer-dashboard>
+    </div>
+</div>

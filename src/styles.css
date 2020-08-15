@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  overflow: auto;
+  height: 100%;
+}
+
+.h1 {
+  font-size: medium;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.no-padding {
+  padding-right: 0px !important;
+  padding-left: 0px !important;
+}

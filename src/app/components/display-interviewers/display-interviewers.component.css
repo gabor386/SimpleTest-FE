@@ -1,0 +1,11 @@
+.btn-add {
+  margin-left: 30px;
+}
+.fit {
+  white-space: nowrap;
+  width: 1%;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}

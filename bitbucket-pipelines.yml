@@ -1,0 +1,19 @@
+image: node:12.0
+
+pipelines:
+  branches:
+    master:
+      - step:
+          caches:
+            - node
+          script:
+            - npm install
+            - npm install -g @angular/cli
+            - ng build --prod
+          artifacts:
+            - dist/**
+      - step:
+          image: atlassian/pipelines-awscli
+          script:
+            - aws s3 sync --delete dist s3://$AWS_BUCKET_TARGET
+          deployment: production

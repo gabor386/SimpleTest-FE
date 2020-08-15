@@ -1,0 +1,46 @@
+<div class="modal-header">
+    <h4 class="modal-title">Add new candidate</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="candidateForm" (ngSubmit)="onSubmit()">
+        <div formGroupName="user">
+            <input required type="text" placeholder="Email" class="form-control" formControlName="email"><br>
+            <span *ngIf="email.errors && (email.touched || email.dirty)">
+
+                <span class="help-block" *ngIf="email.errors.required">
+                    Email is required!
+                </span>
+                <span class="help-block" *ngIf="email.errors.email">
+                    Email needs to be legit!
+                </span>
+            </span>
+            <input required type="text" placeholder="First name" class="form-control" formControlName="firstName">
+            <span *ngIf="firstName.errors && (firstName.touched || firstName.dirty)">
+                <span class="help-block" *ngIf="firstName.errors.required">
+                    You need to enter first name!
+                </span>
+            </span><br>
+            <input required type="text" placeHolder="Last name" class="form-control" formControlName="lastName">
+            <span *ngIf="lastName.errors && (lastName.touched || lastName.dirty)">
+                <span class="help-block" *ngIf="lastName.errors.required">
+                    You need to enter last name!
+                </span>
+            </span><br>
+        </div>
+        <select required class="form-control" formControlName="questionnaire">
+            <option [ngValue]="null" disabled>Select questionnaire</option>
+            <option *ngFor="let t of templates" [ngValue]="t">{{t.testTemplateName}}</option>
+        </select><br>
+        <select required class="form-control" formControlName="reviewer">
+            <option [ngValue]="null" disabled>Select reviewer</option>
+            <option *ngFor="let i of interviewers" [ngValue]="i">{{i.firstName}}</option>
+        </select><br>
+        <div class="modal-footer">
+            <button [disabled]="!candidateForm.valid" type="submit" class="btn btn-primary">Invite</button>
+            <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+        </div>
+    </form>
+</div>

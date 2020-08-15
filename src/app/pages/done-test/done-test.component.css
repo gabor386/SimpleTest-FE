@@ -1,0 +1,39 @@
+#percent {
+  font-size: 5rem;
+  color: green;
+}
+#pointsBorder {
+  border-bottom: 1px solid grey;
+}
+.points {
+  font-size: 5rem;
+}
+#pts {
+  font-size: 2rem;
+}
+
+.badge-check {
+  display: inline;
+  margin-left: 10px;
+  border-radius: 0px;
+}
+
+.action-icon {
+  position: relative;
+  left: -3px;
+}
+
+.exclamation-icon {
+  position: relative;
+  left: -1px;
+}
+
+.question-tab {
+  font-size: 10px;
+  padding: 10px;
+}
+
+.question-text {
+  padding-left: 15px;
+  font-size: 18px;
+}

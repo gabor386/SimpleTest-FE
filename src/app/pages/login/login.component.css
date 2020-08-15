@@ -1,0 +1,11 @@
+.login-wrapper {
+  background-image: url(/assets/img/cover.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-top: 120px;
+  min-height: 100%;
+}
+
+.email-icon {
+  font-size: 13px;
+}

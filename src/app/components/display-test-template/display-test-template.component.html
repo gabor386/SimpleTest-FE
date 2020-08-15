@@ -1,0 +1,35 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title">{{testTemplate.testTemplateName}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+            <div class="col-md-6">
+                <b>TestTemplate Name: </b> {{testTemplate.testTemplateName}}
+                <br>
+                <b>Test Group Name: </b> {{ testTemplate.testGroup.name }}
+                <br>
+            </div>
+        <table class="table">
+            <thead class="thead-light">
+                <th scope="col xs">#</th>
+                <th scope="col-lg-2">Questions</th>
+                
+            </thead>
+            <tbody>
+                <tr *ngFor="let q of testTemplate.question ;let i = index">
+                    <td>{{i+1}}</td>
+                    <td><div [innerHtml]="q.questionText"></div></td>
+                    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="modal-footer">
+        
+        <button type="button" class="btn btn-outline-dark"
+            (click)="activeModal.close('Close click')">Close</button>
+    </div>
+</div>

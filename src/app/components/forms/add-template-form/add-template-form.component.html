@@ -1,0 +1,97 @@
+
+<h1 class="display-4 text-center">Create New Test Template</h1><br>
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Enter new Group</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <div class="input-group">
+                    <form [formGroup]="groupForm">
+                        <input type="text" placeholder="New Group Name" class="form-control" formControlName="name">
+                    </form>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-outline-dark" (click)="modal.close('Save click')"
+            [disabled]="!groupForm.valid">Save</button>
+    </div>
+</ng-template>
+
+
+<div class="container" >
+
+    <form [formGroup]="testTemplateForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-sm-4">
+                <input type="text" class="form-control" formControlName="testTemplateName" placeholder="New Test"><br>
+                <div class="invalid-feedback">{{statusMessage}}</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <select required class="form-control" formControlName="testGroup">
+                    <option [ngValue]="null" disabled>Choose test topic</option>
+                    <option *ngFor="let t of testTemplateGroups" [ngValue]="t">{{t.name}}</option>
+                </select><br>
+            </div>
+            <div class="col">
+                <button class="btn btn-outline-primary" (click)="open(content)" type="button">Add Group</button>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs">
+                <input type="number" class="form-control " formControlName="timer" placeholder="Enter the time Limit" >
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class=" col">
+                    <button type="button" class="btn btn-outline-primary" (click)="addQuestion()">Add Questions</button>
+                </div>
+
+            </div>
+        </div>
+
+        <div formArrayName="question" *ngFor="let test of getTemplateForm() ; let i=index">
+            <div [formGroupName]="i">
+                <div class="row ">
+                    <b>{{i+1}}</b>
+                    <div class="col-xs-12 col-sm-8">
+                        
+                        <angular-editor [config]="editorConfig" formControlName="questionText" placeholder="new quesiton"
+                            ></angular-editor><br>
+                    </div>
+                    <div class="col" *ngIf=" getTemplateForm().length>1">
+                        <button type="button" class="btn btn-danger" title="Delete quesiton"
+                            (click)="removeQuestion(i)">Delete
+
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br><br><button type="submit" class="btn btn-primary" [disabled]="!testTemplateForm.valid">Save Test</button>
+
+
+        <br><br>
+        <div class="alert alert-success float-right">
+            <h4 class="alert-heading" >Tips</h4>
+            <p> 1. Insert new Test Name have to be unique</p>
+            <p> 2. Choose topic of test <small>, or create one with button <i>"Add Group"</i></small></p>
+            <p> 3. Add question as many you like.</p>
+            <p> 4. Click on <i>Save Test</i> button to save your new Test</p>
+        </div>
+        
+    </form>
+
+</div>

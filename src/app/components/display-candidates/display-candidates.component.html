@@ -1,0 +1,61 @@
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
+                </div>
+                <input [(ngModel)]="searchText" type="text" class="form-control"
+                    placeholder="Search candidates by lastname"
+                    (ngModelChange)="this.searchTextUpdate.next($event)">
+                <button class="btn btn-success pull-right btn-add" (click)="open()"><i class="fa fa-user-plus"></i>
+                    &nbsp; Invite</button>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div>
+                <table class="table table-hover table-stripped text-center">
+                    <thead>
+                        <th scope="col" class="fit">#</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Lastname</th>
+                        <th scope="col">Invitation date</th>
+                        <th scope="col">Actions</th>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let candidate of candidates; let i = index">
+                            <th span="row" class="fit">{{i+1}}</th>
+                            <td>{{candidate.user.email}}</td>
+                            <td>{{candidate.user.firstName}}</td>
+                            <td>{{candidate.user.lastName}}</td>
+                            <td>{{candidate.lastStatusUpdate | date}}</td>
+                            <td>
+                                <div ngbDropdown class="d-inline-block">
+                                    <button class="btn btn-sm" ngbDropdownToggle><i
+                                            class="fa fa-ellipsis-v"></i></button>
+                                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                        <button ngbDropdownItem (click)="toProfile(candidate.id)"><i
+                                                class="fa fa-id-badge text-primary"></i> Profile</button>
+                                        <button ngbDropdownItem (click)="openInvite(candidate)"><i
+                                                class="fa fa-plus-square text-success"></i> New test</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="d-flex">
+                    <div class="mx-auto">
+                        <app-pagination [page]="page" (nextPageEvent)="getNextPage()"
+                            (previousPageEvent)="getPreviousPage()" (pageSizeEvent)="getPageInNewSize($event)">
+                        </app-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

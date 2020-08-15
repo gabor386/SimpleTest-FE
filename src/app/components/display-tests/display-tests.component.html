@@ -1,0 +1,52 @@
+<h1 class="display-4 text-center">Available Test</h1>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Candidate</th>
+      <th scope="col">Candidate email</th>
+      <th scope="col">Interviewer</th>
+      <th scope="col">Test</th>
+      <th scope="col">Test group</th>
+      <th scope="col">Status</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+
+
+    <tr *ngFor="let t of tests; let i = index" [attr.data-index]="i">
+      <th scope="row">{{i+1}}</th>
+      <td>{{t.candidate.user.firstName + ' ' + t.candidate.user.lastName}}</td>
+      <td> {{t.candidate.user.email}} </td>
+      <td> {{t.interviewer.firstName + ' ' + t.interviewer.lastName}} </td>
+      <td> {{t.testTemplate.testTemplateName}} </td>
+      <td> {{t.testTemplate.testGroup.name}} </td>
+      <td> {{t.status}} </td>
+      <td>
+        <!-- candidate answers a new test -->
+        <button class="btn btn-success btn-sm" *ngIf="t.status===statusEnum.INVITE && userRole===roles.CANDIDATE"
+          (click)="answerTest(t.id)">Answer</button>
+        <!-- interviewer grades ungraded tests -->
+        
+          <button class="btn btn-primary btn-sm" *ngIf="t.status===statusEnum.REVIEW && userRole===roles.INTERVIEWER"
+            (click)="gradeTest(t.id)">Grading</button>
+        
+        <!-- candidate sees ungraded tests -->
+        <button class="btn btn-primary btn-sm" *ngIf="t.status===statusEnum.REVIEW && userRole===roles.CANDIDATE"
+          (click)="reviewTest(t.id)">Review</button>
+        <!-- candidate or interviewer see graded tests -->
+
+        <button class="btn btn-secondary btn-sm" *ngIf="t.status===statusEnum.REVIEWED"
+          (click)="reviewTest(t.id)">Scores</button>
+
+        <!-- Interviewer waits for candidate to answer a test -->
+        <div class="small font-weight-light font-italic"
+          *ngIf="t.status===statusEnum.INVITE && userRole===roles.INTERVIEWER"> Test pending... </div>
+
+      </td>
+    </tr>
+
+
+  </tbody>
+</table>

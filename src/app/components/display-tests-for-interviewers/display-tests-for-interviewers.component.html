@@ -1,0 +1,50 @@
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Interviewer info</h4>
+                <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                    <div class="col-md-6">
+                        <b>Name: </b> {{user.firstName}}
+                        <br>
+                        <b>Surname: </b> {{ user.lastName }}
+                        <br>
+                        <b>Email: </b> {{ user.email }}
+                        <br>
+                    </div>
+                <table class="table">
+                    <thead class="thead-light">
+                        <th scope="col">#</th>
+                        <th scope="col">Candidate name</th>
+                        <th scope="col">Candidate surname</th>
+                        <th scope="col">Test template</th>
+                        <th scope="col">Status</th>
+                        <th scope="col"></th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let test of tests; let i = index">
+                            <td>{{i+1}}</td>
+                            <td>{{test.candidate.user.firstName}}</td>
+                            <td>{{test.candidate.user.lastName}}</td>
+                            <td>{{test.testTemplate.testTemplateName}}</td>
+                            <td>{{test.status}}</td>
+                            <td>
+                                <button class="btn btn-secondary btn-sm" *ngIf="test.status===statuses.REVIEWED"
+                                    (click)="reviewTest(test.id)">Scores</button>
+                                <div class="small font-weight-light font-italic"
+                                    *ngIf="test.status===statuses.INVITE || test.status===statuses.REVIEW"> Scores
+                                    pending... </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="activeModal.close('Close click')">OK</button>
+                <button type="button" class="btn btn-outline-dark"
+                    (click)="activeModal.close('Close click')">Close</button>
+            </div>
+        </div>
+

@@ -1,0 +1,65 @@
+<h1 *ngIf="test" class="display-3">Test: {{ test.testTemplate.testTemplateName }}</h1>
+
+<div class=" d-flex justify-content-end mb-1">
+  <button type="submit" class="btn btn-success" (click)="submit()">Finish test</button>
+</div>
+
+<div class="row">
+  <div class="col-2">
+    <ul class="list-group cursor-pointer">
+      <li *ngFor="let f of answerForm.controls; let i = index"
+        class="list-group-item d-flex justify-content-between align-items-center question-tab"
+        [class.active]="selectedQuestionIndex===i"
+        (click)="setSelectedQuestionIndex(i)">
+        {{ i + 1 }}.
+        <span *ngIf="answers[i].question.isMarkedForCheck" placement="top" ngbTooltip="Marked for check"
+          class="badge badge-danger badge-pill">!</span>
+      </li>
+    </ul>
+  </div>
+  <div class="col-10 card" style="padding: 10px;">
+    <div class="row">
+      <div class="col-1">
+        <ul class="list-group cursor-pointer">
+          <li (click)="previousQuestion()" placement="right" ngbTooltip="Navigate to previous question" class="list-group-item d-flex justify-content-between align-items-center">
+            <i class="fa fa-arrow-up action-icon text-primary"></i>
+          </li>
+          <li (click)="nextQuestion()" placement="right" ngbTooltip="Navigate to next question" class="list-group-item d-flex justify-content-between align-items-center">
+            <i class="fa fa-arrow-down action-icon text-primary"></i>
+          </li>
+          <li (click)="markForCheck()" placement="right" ngbTooltip="Mark this question for check" class="list-group-item d-flex justify-content-between align-items-center">
+            <i class="fa fa-exclamation exclamation-icon text-danger"></i>
+          </li>
+        </ul>
+      </div>
+      <div class="col-11" [formGroup]="answerForm">
+        <div *ngFor="let f of answerForm.controls; let i = index" [attr.data-index]="i">
+          <div *ngIf="selectedQuestionIndex === i" class="mt-1">
+            <div class="question-text" [innerHtml]="answers[i].question.questionText"><b>{{i+1}}</b>.</div>
+            <div class="container mt-2">
+              <textarea class="form-control" [formControl]="answerForm.controls[i]" rows="5" placeholder="Type your answer here.."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br/><br/><br/>
+
+<!-- <div class="container my-4">
+  <form [formGroup]="answerForm" (ngSubmit)="submit()">
+    <div *ngFor="let f of answerForm.controls; let i = index" [attr.data-index]="i" class="card mt-1">
+      <div class="card-body">
+        <div> <b> {{i+1}}. </b> {{answers[i].question.questionText}}</div>
+        <div class="container mt-2">
+          <textarea class="form-control" [formControl]="answerForm.controls[i]" rows="3"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="row container d-flex justify-content-end mt-4 mb-5 pb-5">
+      <button type="submit" class="btn btn-success">Submit</button>
+    </div>
+  </form>
+</div> -->
